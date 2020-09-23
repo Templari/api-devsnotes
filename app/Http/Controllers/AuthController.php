@@ -22,7 +22,7 @@ class AuthController extends Controller
         $response = ['errors' => false];
         $returnCode = 200;
 
-        $data = $request->only('name', 'email', 'password');
+        $data = $request->only('name', 'email', 'password', 'password_confirmation');
         $validation = $this->validation($data);
 
         if ($validation->fails()) {
@@ -67,7 +67,7 @@ class AuthController extends Controller
         return Validator::make($data, [
             'name' => ['required'],
             'email' => ['required', 'email', 'max:100'],
-            'password' => ['required', 'min:4'],
+            'password' => ['required', 'min:4', 'confirmed'],
         ]);
     }
 
