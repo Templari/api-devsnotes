@@ -2,6 +2,10 @@
 
 Uma API para gerenciar notas.
 
+### Dependências
+
+- **JWT Auth**: Uma biblioteca para gerenciamento de tokens de autenticação.
+
 ### Endpoints
 
 Método | Endpoint | Parâmetros | Descrição
