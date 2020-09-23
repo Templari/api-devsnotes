@@ -21,5 +21,6 @@ GET | api/user/:id | - | receber dados de um usuário.
 DELETE | api/user/:id | - | remover um usuário.
 POST | api/notes | title, body, created_by | criar nota.
 PUT | api/notes | title, body, created_by | atualizar nota.
+GET | api/notes | - | listar notas.
 GET | api/notes/:id | - | receber dados de uma nota.
 DELETE | api/notes/:id | - | remover uma nota.
