@@ -10,4 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected $loggedUser;
+
+    function __construct()
+    {
+        $this->loggedUser = auth()->user();
+    }
 }
