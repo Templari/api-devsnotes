@@ -11,10 +11,18 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected $response = ['error' => false];
+    protected $returnCode = 200;
     protected $loggedUser;
 
     function __construct()
     {
+        $this->middleware('auth:api');
         $this->loggedUser = auth()->user();
+    }
+
+    protected function response()
+    {
+        return response()->json($this->response, $this->returnCode);
     }
 }
