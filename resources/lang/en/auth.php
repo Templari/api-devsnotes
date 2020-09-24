@@ -16,6 +16,5 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'unauthorized' => 'You do not have permission to make this request.',
-    '500' => 'Something went wrong.',
 
 ];
