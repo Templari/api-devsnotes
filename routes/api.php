@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\UserController;
 
@@ -16,24 +16,24 @@ Route::get('/ping', function () {
 });
 
 // Rota para acessos não autorizados
-Route::get('/401', [AuthController::class, 'unauthorized'])->name('401');
+Route::get('/401', [LoginController::class, 'unauthorized'])->name('401');
 
 // Rotas de autenticação
-Route::post('/auth/login', [AuthController::class, 'login']);
-Route::post('/auth/logout', [AuthController::class, 'logout']);
-Route::post('/auth/refresh', [AuthController::class, 'refresh']);
+Route::post('/auth/login', [LoginController::class, 'login']);
+Route::post('/auth/logout', [LoginController::class, 'logout']);
+Route::post('/auth/refresh', [LoginController::class, 'refresh']);
 
 // Rotas de usuários
-Route::post('/users', [AuthController::class, 'create']);
 Route::get('/user', [UserController::class, 'viewCurrent']);
 Route::get('/user/{id}', [UserController::class, 'view']);
+Route::post('/user', [UserController::class, 'create']);
+Route::put('/user', [UserController::class, 'update']);
 Route::get('/users', [UserController::class, 'list']);
-Route::put('/users/{id}', [UserController::class, 'update']);
-Route::delete('/users/delete/{id}', [UserController::class, 'delete']);
+Route::delete('/user/{id}', [UserController::class, 'delete']);
 
 // Rotas de notas
 Route::get('/note/{id}', [NoteController::class, 'view']);
 Route::get('/notes', [NoteController::class, 'list']);
 Route::post('/notes', [NoteController::class, 'create']);
 Route::put('/notes/{id}', [NoteController::class, 'update']);
-Route::post('/notes/delete/{id}', [NoteController::class, 'delete']);
+Route::delete('/note/{id}', [NoteController::class, 'delete']);
