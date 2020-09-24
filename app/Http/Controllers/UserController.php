@@ -23,7 +23,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (! $user) {
-            return $this->response(400, __('auth.failed'));
+            return $this->response(400, __('validation.failed'));
         }
 
         $this->response['user'] = $this->userData($user);
@@ -35,7 +35,7 @@ class UserController extends Controller
         $user = $this->loggedUser;
 
         if (! $user) {
-            return $this->response(500, __('auth.500'));
+            return $this->response(500, __('validation.500'));
         }
 
         $this->response['user'] = $this->userData($user, true);
@@ -45,10 +45,7 @@ class UserController extends Controller
     function list()
     {
         $users = User::all();
-
-        if (! count($users)) {
-            return $this->response(500, __('auth.500'));
-        }
+        $this->response['users'] = [];
 
         foreach ($users as $user) {
             $this->response['users'][] = $this->userData($user);
@@ -60,14 +57,14 @@ class UserController extends Controller
     function create(Request $request)
     {
         $data = $request->only('name', 'email', 'password', 'password_confirmation');
-        $validation = $this->validation($data, [
+        $validator = $this->validator($data, [
             'name' => ['required'],
             'email' => ['required'],
             'password' => ['required'],
         ]);
 
-        if ($validation->fails()) {
-            return $this->response(422, $validation->errors());
+        if ($validator->fails()) {
+            return $this->response(422, $validator->errors());
         }
 
         $user = User::create([
@@ -79,7 +76,7 @@ class UserController extends Controller
         $token = $this->attempt($request);
 
         if (! $token) {
-            return $this->response(500, __('auth.500'));
+            return $this->response(500, __('validation.500'));
         }
 
         $this->response['token'] = $token;
@@ -91,11 +88,11 @@ class UserController extends Controller
         $user = $this->loggedUser;
 
         if (! $user) {
-            return $this->response(500, __('auth.500'));
+            return $this->response(500, __('validation.500'));
         }
 
         $data = $request->only('name', 'email', 'password', 'password_confirmation');
-        $validator = $this->validation($data, [
+        $validator = $this->validator($data, [
             'name' => ['nullable', 'sometimes'],
             'email' => ['nullable', 'sometimes'],
             'password' => ['nullable'],
@@ -123,15 +120,15 @@ class UserController extends Controller
         /* $user = User::find($id);
 
         if (! $user) {
-            $this->response['error'] = __('auth.failed');
+            $this->response['error'] = __('validation.failed');
             return $this->response(400);
         }
 
         $user->delete(); */
-        return $this->response(401, __('auth.unauthorized'));
+        return $this->response(401, __('validation.unauthorized'));
     }
 
-    private function validation($data, $additional = [])
+    private function validator($data, $additional = [])
     {
         $nameRegex = "/^[A-ZÀ-Ÿ][A-zÀ-ÿ']+\s([A-zÀ-ÿ']\s?)*[A-ZÀ-Ÿ][A-zÀ-ÿ']+/";
         $rules = [
