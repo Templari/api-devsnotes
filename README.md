@@ -4,7 +4,52 @@ Uma API para gerenciar notas.
 
 ### Dependências
 
-- **JWT Auth**: Uma biblioteca para gerenciamento de tokens de autenticação.
+- [**JWT Auth**](https://jwt-auth.readthedocs.io/en/develop/): Uma biblioteca para gerenciamento de tokens de autenticação.
+
+### Instalação
+
+1. na pasta do projeto, crie uma cópia do arquivo <b>.env.example</b> e o renomeie para <b>.env</b>.
+
+2. no arquivo .env, altere as seguintes linhas, de acordo com a conexão do seu banco de dados. Os dados abaixo são os valores padrão:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+3. execute as migrations:
+```php
+php artisan migrate
+```
+
+4. rode o comando abaixo para gerar uma nova chave para o projeto que será salva no arquivo .env:
+```php
+php artisan key:generate
+```
+
+5. instale as dependências do projeto executando o comando:
+```shell
+composer install
+```
+
+6. publique as configurações do JWTAuth com o seguinte comando:
+```shell
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+```
+
+7. gere uma ```secret key``` para o JWTAuth:
+```shell
+php artisan jwt:secret
+```
+
+8. finalmente, rode o servidor com o comando:
+```shell
+php artisan serve
+```
 
 ### Endpoints
 
