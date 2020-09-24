@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected $response = ['error' => false];
+    protected $response = [];
     protected $loggedUser;
 
     function __construct()
