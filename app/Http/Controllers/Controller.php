@@ -12,7 +12,6 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $response = ['error' => false];
-    protected $returnCode = 200;
     protected $loggedUser;
 
     function __construct()
@@ -21,8 +20,12 @@ class Controller extends BaseController
         $this->loggedUser = auth()->user();
     }
 
-    protected function response()
+    protected function response(int $returnCode = 200, $error = null)
     {
-        return response()->json($this->response, $this->returnCode);
+        if ($error) {
+            $this->response['error'] = $error;
+        }
+
+        return response()->json($this->response, $returnCode);
     }
 }
