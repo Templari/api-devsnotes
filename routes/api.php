@@ -24,16 +24,16 @@ Route::post('/auth/logout', [LoginController::class, 'logout']);
 Route::post('/auth/refresh', [LoginController::class, 'refresh']);
 
 // Rotas de usuários
+Route::get('/users', [UserController::class, 'list']);
 Route::get('/user', [UserController::class, 'viewCurrent']);
 Route::get('/user/{id}', [UserController::class, 'view']);
 Route::post('/user', [UserController::class, 'create']);
 Route::put('/user', [UserController::class, 'update']);
-Route::get('/users', [UserController::class, 'list']);
 Route::delete('/user/{id}', [UserController::class, 'delete']);
 
 // Rotas de notas
-Route::get('/note/{id}', [NoteController::class, 'view']);
 Route::get('/notes', [NoteController::class, 'list']);
-Route::post('/notes', [NoteController::class, 'create']);
-Route::put('/notes/{id}', [NoteController::class, 'update']);
+Route::get('/note/{id}', [NoteController::class, 'view']);
+Route::post('/note', [NoteController::class, 'create']);
+Route::put('/note/{id}', [NoteController::class, 'update']);
 Route::delete('/note/{id}', [NoteController::class, 'delete']);
