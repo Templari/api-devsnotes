@@ -28,7 +28,7 @@ Route::post('/users', [AuthController::class, 'create']);
 Route::get('/user', [UserController::class, 'viewCurrent']);
 Route::get('/user/{id}', [UserController::class, 'view']);
 Route::get('/users', [UserController::class, 'list']);
-Route::put('/users/{id}', [AuthController::class, 'update']);
+Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/delete/{id}', [UserController::class, 'delete']);
 
 // Rotas de notas
