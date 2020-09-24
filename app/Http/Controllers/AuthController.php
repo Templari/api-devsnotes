@@ -11,9 +11,6 @@ use App\Models\User;
 class AuthController extends Controller
 {
 
-    private $response = ['error' => false];
-    private $returnCode = 200;
-
     function __construct()
     {
         $this->middleware('auth:api', [
@@ -48,7 +45,7 @@ class AuthController extends Controller
         $token = $this->attempt($request);
 
         if (! $token) {
-            $this->response['error'] = true;
+            $this->response['error'] = __('auth.500');
             $this->returnCode = 500;
             return $this->response();
         }
@@ -98,11 +95,6 @@ class AuthController extends Controller
             'email' => $request->input('email', ''),
             'password' => $request->input('password', ''),
         ]);
-    }
-
-    private function response()
-    {
-        return response()->json($this->response, $this->returnCode);
     }
 
 }
