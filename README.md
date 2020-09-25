@@ -2,6 +2,28 @@
 
 Uma API para gerenciar notas.
 
+### Endereço
+#### [https://apidevsnotes.herokuapp.com/](https://apidevsnotes.herokuapp.com/)
+
+### Endpoints
+
+Método | Endpoint | Parâmetros | Descrição
+-|-|-|-
+POST | api/auth/login | email, password | fazer login.
+POST | api/auth/logout | - | finalizar sessão.
+POST | api/auth/refresh | - | renovar token de autenticação.
+GET | api/users | - | listar usuários.
+GET | api/user | - | receber dados do usuário logado.
+GET | api/user/:id | - | receber dados de um usuário.
+POST | api/user | name, email, password, password_confirmation | criar usuário.
+PUT | api/user | name, email, password, password_confirmation | alterar informações do usuário logado.
+GET | api/notes | - | listar notas.
+GET | api/note/:id | - | receber dados de uma nota.
+POST | api/note | title, body | criar nota.
+PUT | api/note | title, body | atualizar nota.
+DELETE | api/note/:id | - | remover uma nota.
+
+
 ### Dependências
 
 - [**JWT Auth**](https://jwt-auth.readthedocs.io/en/develop/): Uma biblioteca para gerenciamento de tokens de autenticação.
@@ -50,21 +72,3 @@ php artisan jwt:secret
 ```shell
 php artisan serve
 ```
-
-### Endpoints
-
-Método | Endpoint | Parâmetros | Descrição
--|-|-|-
-POST | api/auth/login | email, password | fazer login.
-POST | api/auth/logout | - | finalizar sessão.
-POST | api/auth/refresh | - | renovar token de autenticação.
-GET | api/users | - | listar usuários.
-GET | api/user | - | receber dados do usuário logado.
-GET | api/user/:id | - | receber dados de um usuário.
-POST | api/user | name, email, password, password_confirmation | criar usuário.
-PUT | api/user | name, email, password, password_confirmation | alterar informações do usuário logado.
-GET | api/notes | - | listar notas.
-GET | api/note/:id | - | receber dados de uma nota.
-POST | api/note | title, body | criar nota.
-PUT | api/note | title, body | atualizar nota.
-DELETE | api/note/:id | - | remover uma nota.
