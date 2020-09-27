@@ -13,13 +13,6 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $response = [];
-    protected $loggedUser;
-
-    function __construct()
-    {
-        $this->middleware('auth:api');
-        $this->loggedUser = auth()->user();
-    }
 
     protected function response(int $returnCode = 200, $error = null)
     {
@@ -37,4 +30,5 @@ class Controller extends BaseController
             'password' => $request->input('password', ''),
         ]);
     }
+
 }
