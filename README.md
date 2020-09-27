@@ -30,9 +30,12 @@ DELETE | api/note/:id | - | remover uma nota.
 
 ### Instalação
 
-1. na pasta do projeto, crie uma cópia do arquivo <b>.env.example</b> e o renomeie para <b>.env</b>.
+1. na pasta do projeto, crie uma cópia do arquivo <b>.env.example</b> e o renomeie para <b>.env</b>:
+```shell
+cp .env.example .env
+```
 
-2. no arquivo .env, altere as seguintes linhas, de acordo com a conexão do seu banco de dados. Os dados abaixo são os valores padrão:
+2. abra o arquivo .env e altere as seguintes linhas, de acordo com a conexão do seu banco de dados:
 
 ```
 DB_CONNECTION=mysql
@@ -43,19 +46,19 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-3. execute as migrations:
-```php
-php artisan migrate
+3. instale as dependências do projeto executando o comando:
+```shell
+composer install
 ```
 
-4. rode o comando abaixo para gerar uma nova chave para o projeto que será salva no arquivo .env:
-```php
+4. rode o comando abaixo para gerar uma nova chave para o projeto, a qual será salva no arquivo .env:
+```shell
 php artisan key:generate
 ```
 
-5. instale as dependências do projeto executando o comando:
+5. execute as migrations:
 ```shell
-composer install
+php artisan migrate
 ```
 
 6. publique as configurações do JWTAuth com o seguinte comando:
