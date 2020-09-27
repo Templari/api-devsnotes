@@ -118,10 +118,6 @@ return [
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
-    '500' => 'Something went wrong.',
-    'note_not_found' => 'The note does not exist in our records.',
-    'note_not_permitted' => 'User does not have permission to update note.',
-
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
