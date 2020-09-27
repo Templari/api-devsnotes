@@ -11,11 +11,15 @@ use App\Models\User;
 class UserController extends Controller
 {
 
+    private $loggedUser = null;
+
     function __construct()
     {
         $this->middleware('auth:api', [
             'except' => ['create']
         ]);
+        $this->middleware('locale');
+        $this->loggedUser = auth()->user();
     }
     
     function view($id)
@@ -35,7 +39,7 @@ class UserController extends Controller
         $user = $this->loggedUser;
 
         if (! $user) {
-            return $this->response(500, __('validation.500'));
+            return $this->response(500);
         }
 
         $this->response['user'] = $this->userData($user, true);
@@ -76,7 +80,7 @@ class UserController extends Controller
         $token = $this->attempt($request);
 
         if (! $token) {
-            return $this->response(500, __('validation.500'));
+            return $this->response(500);
         }
 
         $this->response['token'] = $token;
@@ -88,7 +92,7 @@ class UserController extends Controller
         $user = $this->loggedUser;
 
         if (! $user) {
-            return $this->response(500, __('validation.500'));
+            return $this->response(500);
         }
 
         $data = $request->only('name', 'email', 'password', 'password_confirmation');
@@ -115,17 +119,7 @@ class UserController extends Controller
 
     function delete($id)
     {
-        // TODO: apenas usuários com privilégios podem remover outros
-
-        /* $user = User::find($id);
-
-        if (! $user) {
-            $this->response['error'] = __('validation.failed');
-            return $this->response(400);
-        }
-
-        $user->delete(); */
-        return $this->response(401, __('validation.unauthorized'));
+        return $this->response(401);
     }
 
     private function validator($data, $additional = [])
@@ -133,7 +127,7 @@ class UserController extends Controller
         $nameRegex = "/^[A-ZÀ-Ÿ][A-zÀ-ÿ']+\s([A-zÀ-ÿ']\s?)*[A-ZÀ-Ÿ][A-zÀ-ÿ']+/";
         $rules = [
             'name' => ['string', 'min:2', 'max:100', "regex: $nameRegex"],
-            'email' => ['email', 'max:100'],
+            'email' => ['email', 'max:100', 'unique:users'],
             'password' => ['min:4', 'confirmed'],
         ];
 
