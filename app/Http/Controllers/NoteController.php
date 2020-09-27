@@ -15,8 +15,6 @@ class NoteController extends Controller
 
     function __construct()
     {
-        $this->middleware('auth:api');
-        $this->middleware('locale');
         $this->loggedUser = auth()->user();
     }
 

@@ -18,7 +18,6 @@ class UserController extends Controller
         $this->middleware('auth:api', [
             'except' => ['create']
         ]);
-        $this->middleware('locale');
         $this->loggedUser = auth()->user();
     }
     

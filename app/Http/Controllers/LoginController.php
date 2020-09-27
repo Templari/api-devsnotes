@@ -15,7 +15,6 @@ class LoginController extends Controller
         $this->middleware('auth:api', [
             'except' => ['login', 'unauthorized']
         ]);
-        $this->middleware('locale');
     }
     
     function unauthorized()
