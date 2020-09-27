@@ -31,12 +31,17 @@ DELETE | api/note/:id | - | remover uma nota.
 
 ### Instalação
 
-1. na pasta do projeto, crie uma cópia do arquivo <b>.env.example</b> e o renomeie para <b>.env</b>:
+1. instale as dependências do projeto executando o comando:
+```shell
+$ composer install
+```
+
+2. na pasta do projeto, crie uma cópia do arquivo <b>.env.example</b> e o renomeie para <b>.env</b>:
 ```shell
 $ cp .env.example .env
 ```
 
-2. abra o arquivo .env e altere as seguintes linhas, de acordo com a conexão do seu banco de dados:
+3. abra o arquivo .env e altere as seguintes linhas, de acordo com a conexão do seu banco de dados:
 ```php
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -44,11 +49,6 @@ DB_PORT=3306
 DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=
-```
-
-3. instale as dependências do projeto executando o comando:
-```shell
-$ composer install
 ```
 
 4. rode o comando abaixo para gerar uma nova chave para o projeto, a qual será salva no arquivo .env:
