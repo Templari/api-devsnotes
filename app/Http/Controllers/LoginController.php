@@ -46,12 +46,4 @@ class LoginController extends Controller
         return $this->response();
     }
 
-    private function attempt(Request $request)
-    {
-        return auth()->attempt([
-            'email' => $request->input('email', ''),
-            'password' => $request->input('password', ''),
-        ]);
-    }
-
 }
