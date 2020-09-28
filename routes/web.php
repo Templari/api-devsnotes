@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return 'API';
+    return '';
+});
+
+// Fallback
+Route::fallback(function () {
+    return response()->json(['error' => __('statuses.404')], 404);
 });
