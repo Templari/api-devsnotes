@@ -20,4 +20,4 @@ Route::get('/', function () {
 // Fallback
 Route::fallback(function () {
     return response()->json(['error' => __('statuses.404')], 404);
-});
+})->middleware('locale');
