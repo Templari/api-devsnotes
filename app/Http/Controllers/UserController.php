@@ -11,14 +11,13 @@ use App\Models\User;
 class UserController extends Controller
 {
 
-    private $loggedUser = null;
-
     function __construct()
     {
         $this->middleware('auth:api', [
             'except' => ['create']
         ]);
-        $this->loggedUser = auth()->user();
+
+        parent::__construct();
     }
     
     function view($id)

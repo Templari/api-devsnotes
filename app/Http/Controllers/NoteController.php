@@ -11,13 +11,6 @@ use App\Models\Note;
 class NoteController extends Controller
 {
 
-    private $loggedUser = null;
-
-    function __construct()
-    {
-        $this->loggedUser = auth()->user();
-    }
-
     function list()
     {
         $notes = Note::all();
