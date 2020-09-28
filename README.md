@@ -71,12 +71,7 @@ $ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceP
 $ php artisan jwt:secret
 ```
 
-8. publique os arquivos de tradução pt_BR:
-```shell
-$ php artisan vendor:publish --tag=laravel-pt-br-localization
-```
-
-9. finalmente, rode o servidor com o comando:
+8. finalmente, rode o servidor com o comando:
 ```shell
 $ php artisan serve
 ```
