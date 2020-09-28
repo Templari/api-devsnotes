@@ -17,6 +17,7 @@ class Controller extends BaseController
 
     function __construct()
     {
+        $this->middleware('auth:api');
         $this->loggedUser = auth()->user();
     }
 
