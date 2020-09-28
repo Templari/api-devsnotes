@@ -13,11 +13,7 @@ class UserController extends Controller
 
     function __construct()
     {
-        $this->middleware('auth:api', [
-            'except' => ['create']
-        ]);
-
-        parent::__construct();
+        parent::__construct(['create']);
     }
     
     function view($id)

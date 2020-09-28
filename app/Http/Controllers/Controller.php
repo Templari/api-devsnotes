@@ -15,10 +15,16 @@ class Controller extends BaseController
     protected $response = [];
     protected $loggedUser = null;
 
-    function __construct()
+    function __construct(array $exceptMethods = [])
     {
-        $this->middleware('auth:api');
         $this->loggedUser = auth()->user();
+
+        if (count($exceptMethods)) {
+            $this->middleware('auth:api', ['except' => $exceptMethods]);
+            return;
+        }
+
+        $this->middleware('auth:api');
     }
 
     protected function response(int $returnCode = 200, $error = null)

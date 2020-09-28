@@ -12,9 +12,7 @@ class LoginController extends Controller
 
     function __construct()
     {
-        $this->middleware('auth:api', [
-            'except' => ['login', 'unauthorized']
-        ]);
+        parent::__construct(['login', 'unauthorized']);
     }
     
     function unauthorized()
