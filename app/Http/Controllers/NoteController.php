@@ -28,7 +28,7 @@ class NoteController extends Controller
         $note = Note::find($id);
 
         if (! $note) {
-            return $this->response(400);
+            return $this->response(400, __('statuses.400_notes'));
         }
 
         $this->response['note'] = $this->noteData($note, true);
@@ -47,7 +47,7 @@ class NoteController extends Controller
         }
 
         if (! $this->loggedUser) {
-            return $this->response(500);
+            return $this->response(500, __('statuses.500'));
         }
 
         Note::create([
@@ -64,15 +64,15 @@ class NoteController extends Controller
         $note = Note::find($id);
 
         if (! $note) {
-            return $this->response(400);
+            return $this->response(400, __('statuses.400_notes'));
         }
 
         if (! $this->loggedUser) {
-            return $this->response(500);
+            return $this->response(500, __('statuses.500'));
         }
 
         if ($note->user_id != $this->loggedUser->id) {
-            return $this->response(401);
+            return $this->response(401, __('statuses.401'));
         }
 
         $data = [
@@ -103,7 +103,7 @@ class NoteController extends Controller
         $note = Note::find($id);
 
         if (! $note) {
-            return $this->response(400);
+            return $this->response(400, __('statuses.400_notes'));
         }
 
         $note->delete();

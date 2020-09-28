@@ -19,7 +19,7 @@ class LoginController extends Controller
     
     function unauthorized()
     {
-        return $this->response(401);
+        return $this->response(401, __('statuses.401'));
     }
     
     function login(Request $request)

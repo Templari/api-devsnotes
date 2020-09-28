@@ -37,7 +37,7 @@ class UserController extends Controller
         $user = $this->loggedUser;
 
         if (! $user) {
-            return $this->response(500);
+            return $this->response(500, __('statuses.500'));
         }
 
         $this->response['user'] = $this->userData($user, true);
@@ -78,7 +78,7 @@ class UserController extends Controller
         $token = $this->attempt($request);
 
         if (! $token) {
-            return $this->response(500);
+            return $this->response(500, __('statuses.500'));
         }
 
         $this->response['token'] = $token;
@@ -90,7 +90,7 @@ class UserController extends Controller
         $user = $this->loggedUser;
 
         if (! $user) {
-            return $this->response(500);
+            return $this->response(500, __('statuses.500'));
         }
 
         $data = $request->only('name', 'email', 'password', 'password_confirmation');
@@ -117,7 +117,7 @@ class UserController extends Controller
 
     function delete($id)
     {
-        return $this->response(401);
+        return $this->response(401, __('statuses.401'));
     }
 
     private function validator($data, $additional = [])
