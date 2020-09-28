@@ -3,7 +3,7 @@
 Uma API para gerenciar notas.
 
 ### Endereço
-#### [https://apidevsnotes.herokuapp.com/](https://apidevsnotes.herokuapp.com/)
+#### [https://tdevsnotes.herokuapp.com/](https://tdevsnotes.herokuapp.com/)
 
 ### Endpoints
 
