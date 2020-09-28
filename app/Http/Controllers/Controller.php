@@ -13,6 +13,12 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $response = [];
+    protected $loggedUser = null;
+
+    function __construct()
+    {
+        $this->loggedUser = auth()->user();
+    }
 
     protected function response(int $returnCode = 200, $error = null)
     {
