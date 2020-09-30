@@ -80,18 +80,17 @@ class NoteController extends Controller
             'body' => $request->body ?? '',
         ];
 
-        $validator = $this->validator($data, [
-            'title' => ['nullable'],
-        ]);
-
-        if ($validator->fails()) {
-            return $this->response(422, $validator->errors());
+        if ($data['title'] != $note->title) {
+            $validator = $this->validator($data, [
+                'title' => ['required', 'max:256'],
+            ]);
+    
+            if ($validator->fails()) {
+                return $this->response(422, $validator->errors());
+            }
         }
 
-        if ($data['title']) {
-            $note->title = $data['title'];
-        }
-
+        $note->title = $data['title'];
         $note->body = $data['body'];
 
         $note->save();
