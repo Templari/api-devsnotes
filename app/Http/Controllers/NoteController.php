@@ -77,7 +77,7 @@ class NoteController extends Controller
 
         $data = [
             'title' => $request->title,
-            'body' => $request->body ?? '',
+            'body' => $request->body,
         ];
 
         if ($data['title'] != $note->title) {
@@ -88,10 +88,13 @@ class NoteController extends Controller
             if ($validator->fails()) {
                 return $this->response(422, $validator->errors());
             }
+
+            $note->title = $data['title'];
         }
 
-        $note->title = $data['title'];
-        $note->body = $data['body'];
+        if ($note->body != $data['body']) {
+            $note->body = $data['body'];
+        }
 
         $note->save();
         return $this->response();
