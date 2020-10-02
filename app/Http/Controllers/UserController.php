@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\User;
+use App\Models\Note;
 
 class UserController extends Controller
 {
@@ -57,7 +58,7 @@ class UserController extends Controller
         $data = $request->only('name', 'email', 'password', 'password_confirmation');
         $validator = $this->validator($data, [
             'name' => ['required'],
-            'email' => ['required'],
+            'email' => ['required', 'unique:users'],
             'password' => ['required'],
         ]);
 
@@ -89,11 +90,14 @@ class UserController extends Controller
             return $this->response(500, __('statuses.500'));
         }
 
-        $data = $request->only('name', 'email', 'password', 'password_confirmation');
+        $data = $request->only(
+            'name', 'email', 'password', 'password_confirmation'
+        );
+
         $validator = $this->validator($data, [
-            'name' => ['nullable', 'sometimes'],
-            'email' => ['nullable', 'sometimes'],
-            'password' => ['nullable'],
+            'name' => ['sometimes'],
+            'email' => ['sometimes', (isset($data['email']) && $data['email'] != $user->email ? 'unique:users' : '')],
+            'password' => ['sometimes'],
         ]);
 
         if ($validator->fails()) {
@@ -120,9 +124,9 @@ class UserController extends Controller
     {
         $nameRegex = "/^[A-ZÀ-Ÿ][A-zÀ-ÿ']+\s([A-zÀ-ÿ']\s?)*[A-ZÀ-Ÿ][A-zÀ-ÿ']+/";
         $rules = [
-            'name' => ['string', 'min:2', 'max:100', "regex: $nameRegex"],
-            'email' => ['email', 'max:100', 'unique:users'],
-            'password' => ['min:4', 'confirmed'],
+            'name' => ['required', 'min:2', 'max:100', "regex: $nameRegex"],
+            'email' => ['required', 'email', 'max:100'],
+            'password' => ['required', 'min:4', 'confirmed'],
         ];
 
         foreach ($additional as $key => $values) {
@@ -140,6 +144,7 @@ class UserController extends Controller
     {
         $id = $this->loggedUser ? $this->loggedUser->id : null;
         $current = $user->id == $id;
+        $notes = Note::where('user_id', $user->id)->get();
 
         return [
             'name' => $user->name,
@@ -147,6 +152,7 @@ class UserController extends Controller
             'created_at' => $user->created_at,
             'updated_at' => $user->updated_at,
             'current_user' => $current,
+            'notes' => count($notes),
         ];
     }
 
