@@ -3,7 +3,7 @@
 Uma API para gerenciar notas.
 
 ### Endere√ßo
-#### [https://apidevsnotes.herokuapp.com/](https://apidevsnotes.herokuapp.com/)
+#### [https://tdevsnotes.herokuapp.com/](https://tdevsnotes.herokuapp.com/)
 
 ### Endpoints
 
@@ -20,7 +20,7 @@ PUT | api/user | name, email, password, password_confirmation | alterar informa√
 GET | api/notes | - | listar notas.
 GET | api/note/:id | - | receber dados de uma nota.
 POST | api/note | title, body | criar nota.
-PUT | api/note | title, body | atualizar nota.
+PUT | api/note/:id | title, body | atualizar nota.
 DELETE | api/note/:id | - | remover uma nota.
 
 
