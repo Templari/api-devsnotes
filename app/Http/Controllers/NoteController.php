@@ -75,23 +75,20 @@ class NoteController extends Controller
             return $this->response(401, __('statuses.401'));
         }
 
-        $data = [
-            'title' => $request->title,
-            'body' => $request->body ?? '',
-        ];
+        $data = $request->only(
+            'title', 'body'
+        );
 
-        if ($data['title'] != $note->title) {
-            $validator = $this->validator($data, [
-                'title' => ['required', 'max:256'],
-            ]);
-    
-            if ($validator->fails()) {
-                return $this->response(422, $validator->errors());
-            }
+        $validator = $this->validator($data, [
+            'title' => ['sometimes'],
+        ]);
+
+        if ($validator->fails()) {
+            return $this->response(422, $validator->errors());
         }
 
-        $note->title = $data['title'];
-        $note->body = $data['body'];
+        $note->title = $data['title'] ?? $note->title;
+        $note->body = $data['body'] ?? $note->body;
 
         $note->save();
         return $this->response();
@@ -132,7 +129,7 @@ class NoteController extends Controller
     private function validator($data, $additional = [])
     {
         $rules = [
-            'title' => ['max:256'],
+            'title' => ['required', 'max:256'],
         ];
 
         foreach ($additional as $key => $values) {
